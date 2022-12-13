@@ -1,0 +1,31 @@
+Metadata-Version: 2.1
+Name: credman
+Version: 0.0.1
+Summary: A credential manager
+Author-email: Stephen Booth <stephen.booth.za@gmail.cmo>
+Project-URL: Homepage, https://github.com/sboothza/CredMan
+Project-URL: Bug Tracker, https://github.com/sboothza/CredMan/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+## Credential Manager in python
+
+## Usage
+
+`credman.py --help`
+`credman.py <get | add | delete | update | update-master> <name_of_secret> [--password <password>]`
+
+password parameter is only used for adding or updating a secret
+It will always prompt for the master password 
+
+Invoke it like this: `python credman.py get name_of_secret`
+
+In a bash script: `pass=$(python credman.py get name_of_secret)`
+
+It requires a master password - the file is encrypted with this password, so losing it is bad.
+You can change the master password, it will re-encrypt the file.
+
