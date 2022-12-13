@@ -2,7 +2,10 @@ Metadata-Version: 2.1
 Name: credman
 Version: 0.0.1
 Summary: A credential manager
+Home-page: https://github.com/sboothza/credman
+Author: Stephen Booth
 Author-email: Stephen Booth <stephen.booth.za@gmail.com>
+License: MIT
 Project-URL: Homepage, https://github.com/sboothza/credman
 Project-URL: Bug Tracker, https://github.com/sboothza/credman/issues
 Classifier: Programming Language :: Python :: 3

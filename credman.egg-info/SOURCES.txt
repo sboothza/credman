@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+credman.egg-info/PKG-INFO
+credman.egg-info/SOURCES.txt
+credman.egg-info/dependency_links.txt
+credman.egg-info/requires.txt
+credman.egg-info/top_level.txt
+src/__init__.py
+src/credman.py
+src/passman.py
+src/storage.py

@@ -41,3 +41,4 @@ packages/
 .idea/
 ._*
 __pycache__
+dist/
