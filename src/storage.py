@@ -1,13 +1,23 @@
 import os.path
 import shutil
 from hashlib import md5
+from pathlib import Path
+
+
+def expand_path(path: str) -> str:
+    p = Path(path)
+    p.resolve()
+    return str(p.expanduser())
 
 
 class Storage:
+
     def __init__(self, filename: str):
         self.filename = filename
         if filename == "memory":
             self.data = ""
+        else:
+            self.filename = expand_path(self.filename)
 
     def read(self):
         if self.filename == "memory":
