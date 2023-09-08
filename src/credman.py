@@ -30,8 +30,11 @@ def update(key: str, password: str):
     passman_instance.save()
 
 
-def update_master(old_pwd: str, new_pwd: str):
-    passman_instance.load(old_pwd)
+def update_master(new_pwd: str):
+    passman_instance.load()
+    passman_instance.save(new_pwd)
+
+def new_master(new_pwd:str):
     passman_instance.save(new_pwd)
 
 
@@ -40,10 +43,11 @@ def main():
     parser.add_argument('operation',
                         help='Operation',
                         type=str.lower,
-                        choices=['get', 'add', 'delete', 'update', 'update-master'])
+                        choices=['get', 'add', 'delete', 'update', 'update-master', 'new'])
     parser.add_argument('application',
                         help='Application key for password',
-                        type=str.lower)
+                        type=str.lower,
+                        required=False)
     parser.add_argument('--password',
                         help='Password value',
                         dest='password',
@@ -76,7 +80,9 @@ def main():
             update(args.application, args.password)
     elif args.operation == 'update-master':
         password = getpass("New master password:")
-        update_master(master_pass, password)
+        update_master(password)
+    elif args.opeation == 'new':
+        new_master(master_pass)
 
 
 if __name__ == '__main__':
