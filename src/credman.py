@@ -81,7 +81,7 @@ def main():
     elif args.operation == 'update-master':
         password = getpass("New master password:")
         update_master(password)
-    elif args.opeation == 'new':
+    elif args.operation == 'new':
         new_master(master_pass)
 
 
