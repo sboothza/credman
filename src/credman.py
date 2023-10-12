@@ -46,8 +46,8 @@ def main():
                         choices=['get', 'add', 'delete', 'update', 'update-master', 'new'])
     parser.add_argument('application',
                         help='Application key for password',
-                        type=str.lower,
-                        required=False)
+                        nargs="?",
+                        type=str.lower)
     parser.add_argument('--password',
                         help='Password value',
                         dest='password',
@@ -81,7 +81,7 @@ def main():
     elif args.operation == 'update-master':
         password = getpass("New master password:")
         update_master(password)
-    elif args.opeation == 'new':
+    elif args.operation == 'new':
         new_master(master_pass)
 
 
