@@ -2,7 +2,7 @@ from getpass import getpass
 import argparse
 
 from passman import Passman
-from src.passman import InvalidPasswordException
+from passman import InvalidPasswordException
 from storage import Storage
 
 CRED_SALT = b'ed\xd9\xf1+\x07\xa7K|\n)6YgUy'
