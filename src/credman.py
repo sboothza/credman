@@ -2,6 +2,7 @@ from getpass import getpass
 import argparse
 
 from passman import Passman
+from src.passman import InvalidPasswordException
 from storage import Storage
 
 CRED_SALT = b'ed\xd9\xf1+\x07\xa7K|\n)6YgUy'
@@ -34,7 +35,8 @@ def update_master(new_pwd: str):
     passman_instance.load()
     passman_instance.save(new_pwd)
 
-def new_master(new_pwd:str):
+
+def new_master(new_pwd: str):
     passman_instance.save(new_pwd)
 
 
@@ -61,6 +63,12 @@ def main():
 
     global passman_instance
     passman_instance = Passman(storage, CRED_SALT, master_pass)
+
+    try:
+        passman_instance.load()
+    except:
+        print("Invalid password")
+        exit(1)
 
     if args.operation == 'get':
         print(get(args.application))

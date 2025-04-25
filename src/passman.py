@@ -9,13 +9,17 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from storage import Storage
 
 
+class InvalidPasswordException(Exception):
+    ...
+
+
 class Passman:
     def __init__(self, storage: Storage, salt: bytes, master_password: str):
         self.passwords = {}
         self.salt = salt
         self.master_password = master_password
         self.storage: Storage = storage
-        self.load()
+        # self.load()
 
     def load(self):
         data = self.storage.read()
@@ -45,18 +49,21 @@ class Passman:
         return encrypted
 
     def _decrypt(self, data: str):
-        salt = self.salt
-        kdf = PBKDF2HMAC(
-            algorithm=hashes.SHA256(),
-            length=32,
-            salt=salt,
-            iterations=390000,
-        )
-        key = base64.urlsafe_b64encode(kdf.derive(str.encode(self.master_password)))
-        f = Fernet(key)
-        token = f.decrypt(str.encode(data))
-        decrypted = codecs.decode(token)
-        return decrypted
+        try:
+            salt = self.salt
+            kdf = PBKDF2HMAC(
+                algorithm=hashes.SHA256(),
+                length=32,
+                salt=salt,
+                iterations=390000,
+            )
+            key = base64.urlsafe_b64encode(kdf.derive(str.encode(self.master_password)))
+            f = Fernet(key)
+            token = f.decrypt(str.encode(data))
+            decrypted = codecs.decode(token)
+            return decrypted
+        except:
+            raise InvalidPasswordException()
 
     def get_password(self, key: str) -> str:
         if key in self.passwords:
